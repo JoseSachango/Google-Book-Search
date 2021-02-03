@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     marginLeft: 5,
-    marginRight: 2,
+    marginRight: 20,
   
     
   },
@@ -27,16 +27,23 @@ const useStyles = makeStyles((theme) => ({
   },
   search:{
     marginLeft: 5,
-    marginRight: 5
+    marginRight: 5,
+    [theme.breakpoints.up("xs")]:{
+        display: "inline"
+    }
   },
   saved:{
     marginLeft:5,
-    marginRight:650
+    marginRight:650,
+    [theme.breakpoints.up("xs")]:{
+        display: "inline"
+    }
 
   },
   logInButton: {
-      marginLeft: 420,
-      marginRight: 0
+      textAnchor: "right",
+    
+      
   }
 }));
 
@@ -47,22 +54,39 @@ export default function ButtonAppBar() {
     <div className={classes.root}>
         <AppBar position="static">
             <Toolbar>
-                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" className={classes.title}>
-                     Google 
-                </Typography>
-                <Typography variant="h6" className={classes.title2}>
-                     Books 
-                </Typography>
-                <Typography variant="h8" className={classes.search}>
-                     Search
-                </Typography>
-                <Typography variant="h8" className={classes.saved}>
-                     Saved
-                </Typography>
-                <Button color="inherit" className={classes.logInButton}>Login</Button>
+                
+                   <Grid item xs={9} >
+                        <Grid container direction="row" justify="flex-start" alignItems="center">
+                            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                                <MenuIcon />
+                            </IconButton>
+                            <Typography variant="h6" className={classes.title}>
+                                Google Books
+                            </Typography>
+                            <Typography variant="h8" className={classes.search}>
+                                <Button color="secondary">
+                                    Search
+
+                                </Button>
+                            </Typography>
+                            <Typography variant="h8" className={classes.saved}>
+                                Save
+                            </Typography>
+
+                        </Grid>
+                   </Grid>
+                   <Grid item xs={3}>
+                        <Grid container direction="row" justify="flex-end" alignItems="center">
+                            <Button  color="inherit" className={classes.logInButton}>Login</Button>
+
+                        </Grid>
+
+                   </Grid>
+                       
+
+                   
+                   
+               
             </Toolbar>
         </AppBar>   
     </div>

@@ -20,7 +20,12 @@ import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
+import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
 import clsx from 'clsx';
+import Box from '@material-ui/core/Box';
+
+let theme = createMuiTheme();
+theme = responsiveFontSizes(theme);
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,11 +35,25 @@ const useStyles = makeStyles((theme) => ({
     root2:{
         '& > *': {
             margin: theme.spacing(1),
-            width: '25ch',
+            width: '150ch',
           },
     },
     textField: {
-        width: '25ch',
+        [theme.breakpoints.up("xs")]:{
+
+            width: '25ch'
+        },
+        [theme.breakpoints.up("sm")]:{
+            width: '50ch'
+        },
+        [theme.breakpoints.up("md")]:{
+            width: '100ch'
+        },
+        [theme.breakpoints.up("lg")]:{
+            width: '150ch'
+        }
+        
+        
       },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -56,16 +75,24 @@ const useStyles = makeStyles((theme) => ({
     row: {
         height: 50,
         margin: 50,
-        xs: 12
+        
+       
+
+        [theme.breakpoints.up("xs")]:{
+            display: "none"
+        },
+        [theme.breakpoints.up("md")]:{
+            display:"block"
+        },
+        
         
          
        
     },
     row2: {
         height: 200,
-        marginLeft: 50,
-        marginRight: 50,
-        marginTop: 50
+       margin: 50,
+       
        
     },
     margin: {
@@ -86,7 +113,8 @@ const useStyles = makeStyles((theme) => ({
       
     },
     searchBox:{
-        height: 200
+        height: 200,
+       
     },
     subBanner:{
         
@@ -95,7 +123,7 @@ const useStyles = makeStyles((theme) => ({
     heading: {
         display: "block",
         marginLeft: 25,
-        marginRight: 1300,
+        
         marginBottom: 5,
    
 
@@ -109,7 +137,8 @@ const useStyles = makeStyles((theme) => ({
         
     },
     button:{
-        marginLeft:1250
+        marginTop: 10,
+        marginRight:20
     },
     results:{
         height: 250
@@ -129,14 +158,15 @@ return(
 
     <Grid container className={classes.root} spacing={2}>
 
-            <Grid container className={classes.row} >
+            <Grid   container className={classes.row} >
                 <Grid item xs={12}>
-                    <Paper className={classes.banner}  >
-
-                        <Typography variant="h3" gutterBottom={true}>
-                            (React) Google Books Search
-                         
-                        </Typography>
+                    <Paper  className={classes.banner}  >
+                        <ThemeProvider theme={theme}>
+                            <Typography display="none" variant="h3" gutterBottom={true}>
+                                (React) Google Books Search
+                            
+                            </Typography>
+                        </ThemeProvider>
                         <Typography variant="h7">
                                 Search for and Save Books of Interest
                         </Typography>
@@ -151,43 +181,51 @@ return(
                 <Grid item xs={12} >
                         <Paper className={classes.searchBox} >
 
-                            <Typography className={classes.heading} variant="h6" gutterBottom={true}>
-                               Book Search
-                            </Typography>
+                            <Grid justify="flex-start" direction="row" alignItems="center" container>
 
+                                <Typography className={classes.heading} variant="h6" gutterBottom={true}>
+                                Book Search
+                                </Typography>
                             
-                            <Typography className={classes.heading2} variant="h9" gutterBottom={true}>
-                                Book
-                            </Typography>
+                            </Grid>
+
+                            <Grid justify="flex-start" direction="row" alignItems="center" container>
+
+                                <Typography className={classes.heading} variant="h9" gutterBottom={true}>
+                                    Book
+                                </Typography>
+                            </Grid>
                             
                             
+                            <Grid justify="center" direction="row" alignItems="center" container>
 
-                            <FormControl  className={classes.margin} variant="outlined">
-                                <InputLabel htmlFor="outlined-adornment-amount">Search</InputLabel>
-                                <OutlinedInput
-                                    id="outlined-adornment-amount"
+                                <form  noValidate autoComplete="off">
+                                    <TextField  className={classes.textField} id="outlined-basic" label="Outlined" variant="outlined" />
+                                </form>
 
-                                />
-                            </FormControl>
+                            </Grid>
+                         
 
-                            <Button className={classes.button} variant="contained" color="primary">
-                                Search
-                            </Button>
+
+                            <Grid justify="flex-end" direction="row" alignItems="center" container>
+
+                                <Button className={classes.button} variant="contained" color="primary">
+                                    Search
+                                </Button>
+                            </Grid>
 
                         </Paper>
                 </Grid>
             </Grid>
 
 
-            <Grid container  className={classes.row3} >
-                <Grid item xs={12} >
-                        <Paper className={classes.results} >
 
-                            
 
-                        </Paper>
-                </Grid>
-            </Grid>
+           
+            
+            <Box component="div" display={{xs:"block",md:"none"}} p={1} m={1} bgcolor="background.paper">
+                block
+            </Box>
 
 
             
